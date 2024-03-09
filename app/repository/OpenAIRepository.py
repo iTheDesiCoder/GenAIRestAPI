@@ -7,8 +7,6 @@ from app.common.DTO import CompletionResponse
 
 
 class OpenAIRepository:
-    os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-
     def __init__(self):
         self.chat = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model="gpt-4-turbo-preview")
 
