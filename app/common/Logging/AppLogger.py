@@ -26,4 +26,4 @@ class AppLogger:
         self.logger.error(message)
 
     def critical(self, message):
-        self.logger.critical(message)
+        self.logger.critical(message, exc_info=True)
