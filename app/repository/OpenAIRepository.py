@@ -1,7 +1,7 @@
 import os
 from langchain_openai import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
-from config import OPENAI_API_KEY
+from config.config import OPENAI_API_KEY
 from app.common.DTO import EmbeddingRequest, CompletionRequest
 from app.common.DTO import CompletionResponse
 

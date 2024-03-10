@@ -1,9 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.manager import GenAIManager
 from app.common.DTO import CompletionRequest, CompletionResponse
-from typing import List
-from injector import inject
-from app.common import logger
+from app.common.Logging import logger
 
 genai_router = APIRouter()
 

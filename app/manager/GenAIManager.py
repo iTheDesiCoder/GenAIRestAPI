@@ -8,4 +8,6 @@ class GenAIManager:
         system_message: str = "You are a helpful Annuity sales assistant who is always available to answer questions about the Annuity to Financial Advisor. You are knowledgeable about the annuity and can explain fees, expense, benfits and funds detail to financial advisor."
         openai_repository = OpenAIRepository()
         completion_response = openai_repository.get_openai_completion(completion_request, system_message)
+        genai_repository = GenAIRepository()
+        genai_repository.get_embeddings_from_db()
         return completion_response
