@@ -29,18 +29,18 @@ def test_get_annuity_completion(mocker):
     assert isinstance(response.json(), dict)
     mock_manager.assert_called_once()
 
-    def test_process_doc(self, mocker):
-        # Arrange
-        mock_manager = mocker.patch.object(GenAIManager, 'process_doc')
-        mock_manager.return_value = DocumentResponse(status=True, doc_text='Test text')
-        doc_request = {
-            "base64_pdf": base64.b64encode(b'Test pdf').decode('utf-8')
-        }
+def test_process_doc(mocker):
+    # Arrange
+    mock_manager = mocker.patch.object(GenAIManager, 'process_doc')
+    mock_manager.return_value = DocumentResponse(status=True, doc_text='Test text')
+    doc_request = {
+        "base64_pdf": base64.b64encode(b'Test pdf').decode('utf-8')
+    }
+    client = TestClient(genai_router)
+    # Act
+    response = client.post("/process_doc", json=doc_request)
 
-        # Act
-        response = self.client.post("/process_doc", json=doc_request)
-
-        # Assert
-        assert response.status_code == 200
-        assert response.json() == {"status": True, "doc_text": "Test text"}
-        mock_manager.assert_called_once()
+    # Assert
+    assert response.status_code == 200
+    assert response.json() == {"status": True, "doc_text": "Test text",'message': None}
+    mock_manager.assert_called_once()
