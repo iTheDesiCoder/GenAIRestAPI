@@ -3,7 +3,7 @@ from app.common.DTO import CompletionRequest, CompletionResponse, DocumentReques
 import base64
 import io
 from PyPDF2 import PdfFileReader, PdfReader
-
+from app.common.DTO import Document
 
 class GenAIManager:
     def get_annuity_completion(self, completion_request: CompletionRequest) -> CompletionResponse:
@@ -18,17 +18,22 @@ class GenAIManager:
         return completion_response
 
     def process_doc(self, doc_request: DocumentRequest) -> DocumentResponse:
-        # Decode the base64 string
-        decoded_pdf = base64.b64decode(doc_request.base64_pdf)
+        documents = []
+        for document in doc_request.documents:
+            # Decode the base64 string
+            decoded_pdf = base64.b64decode(document.base64_pdf)
 
-        # Convert the decoded string to a BytesIO object
-        pdf_io = io.BytesIO(decoded_pdf)
+            # Convert the decoded string to a BytesIO object
+            pdf_io = io.BytesIO(decoded_pdf)
 
-        # Use PyPDF2 to read the PDF
-        pdf_reader = PdfReader(pdf_io)
+            # Use PyPDF2 to read the PDF
+            pdf_reader = PdfReader(pdf_io)
 
-        # Extract the text from the PDF
-        pages_text = [page.extract_text() for page in pdf_reader.pages]
+            # Extract the text from each page of the PDF and store it in a list
+            pages_text = [page.extract_text() for page in pdf_reader.pages]
 
-        response = DocumentResponse(status=True, doc_text=pages_text)
+            # Create a Document object and append it to the documents list
+            documents.append(Document(name=document.name, doc_text=pages_text))
+
+        response = DocumentResponse(status=True, documents=documents)
         return response

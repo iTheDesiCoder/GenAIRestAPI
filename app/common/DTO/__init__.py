@@ -1,5 +1,5 @@
 from .CompletionRequest import CompletionRequest
 from .EmbeddingRequest import EmbeddingRequest
 from .CompletionResponse import CompletionResponse
-from .DocumentRequest import DocumentRequest
-from .DocumentResponse import DocumentResponse
+from .DocumentRequest import DocumentBase64, DocumentRequest
+from .DocumentResponse import Document, DocumentResponse
