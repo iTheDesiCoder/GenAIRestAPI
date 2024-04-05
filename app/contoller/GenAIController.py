@@ -11,6 +11,7 @@ class GenAIController:
     @genai_router.post("/get_annuity_completion", status_code=200, response_model=CompletionResponse)
     async def get_annuity_completion(completion_request: CompletionRequest) -> CompletionResponse:
         logger.debug(f"Request received for get_annuity_completion: {completion_request}")
+        logger.info(f"Testing INFO log")
         genai_manager = GenAIManager()
         completion_response = genai_manager.get_annuity_completion(completion_request)
         logger.debug(f"Response for get_annuity_completion: {completion_response}")
@@ -19,6 +20,7 @@ class GenAIController:
     @genai_router.post("/get_annuity_assistant", status_code=200, response_model=CompletionResponse)
     async def get_annuity_completion(completion_request: CompletionRequest) -> CompletionResponse:
         logger.debug(f"Request received for get_annuity_assistant: {completion_request}")
+        logger.info(f"Testing INFO log")
         genai_manager = GenAIManager()
         completion_response = genai_manager.get_annuity_assistant(completion_request)
         logger.debug(f"Response for get_annuity_assistant: {completion_response}")
