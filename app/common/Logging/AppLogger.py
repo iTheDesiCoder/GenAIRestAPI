@@ -1,6 +1,7 @@
 # app/common/Logger.py
 import json
 import logging
+import getpass
 from injector import inject, singleton
 from app.common.Logging.RequestContext import RequestContext
 from app.config import level
@@ -41,6 +42,8 @@ class AppLogger:
         headers = RequestContext.headers.get()
         combined = {
             "headers": headers,
+            "app_proid": getpass.getuser(),
             "message": message
+
         }
         return json.dumps(combined)
